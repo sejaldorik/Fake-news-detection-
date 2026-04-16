@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-wrapper">
+    <div class="glass-panel auth-panel">
+        <div class="auth-header">
+            <h2>Join News Verifier</h2>
+            <p>Create an account to start verifying</p>
+        </div>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            
+            <div class="form-group">
+                {{ form.username.label(class="form-label") }}
+                {% if form.username.errors %}
+                    {{ form.username(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.username.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.username(class="form-control", placeholder="Choose a username") }}
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                {{ form.password.label(class="form-label") }}
+                <div class="password-wrapper">
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control is-invalid", id="reg-password") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control", placeholder="Min. 6 characters", id="reg-password") }}
+                    {% endif %}
+                    <i class="fa-regular fa-eye toggle-password" data-target="reg-password"></i>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                {{ form.confirm_password.label(class="form-label") }}
+                <div class="password-wrapper">
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form-control is-invalid", id="reg-confirm-password") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.confirm_password(class="form-control", placeholder="Confirm your password", id="reg-confirm-password") }}
+                    {% endif %}
+                    <i class="fa-regular fa-eye toggle-password" data-target="reg-confirm-password"></i>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                {{ form.submit(class="btn-primary btn-block") }}
+            </div>
+            <div class="auth-footer">
+                <small>Already registered? <a href="{{ url_for('login') }}">Log In</a></small>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.querySelectorAll('.toggle-password').forEach(icon => {
+        icon.addEventListener('click', function() {
+            const input = document.getElementById(this.getAttribute('data-target'));
+            if (input.type === 'password') {
+                input.type = 'text';
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block head %}
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="glass-panel stats-panel" style="margin-bottom: 2rem;">
+    <h2 style="text-align: center; margin-bottom: 2rem;">Your Analytics Dashboard</h2>
+    
+    <div class="dashboard-grid">
+        <!-- First Row -->
+        <div class="chart-box">
+            <h4 class="text-center">Count Distribution</h4>
+            <canvas id="barChart"></canvas>
+        </div>
+        
+        <div class="chart-box">
+            <h4 class="text-center">Percentage Distribution</h4>
+            <canvas id="pieChart"></canvas>
+        </div>
+        
+        <!-- Second Row -->
+        <div class="chart-box mt-4">
+            <h4 class="text-center">Confidence Score Trends</h4>
+            <canvas id="scatterChart"></canvas>
+        </div>
+
+        <div class="chart-box mt-4">
+            <h4 class="text-center">Detection Trends Over Time</h4>
+            <canvas id="timelineChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="glass-panel mt-4">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h3>Recent Checks</h3>
+        <div style="display: flex; gap: 1rem;">
+            <div class="stat-badge">Total: <span id="stat-total">0</span></div>
+            <div class="stat-badge" style="color: var(--danger);">Fake: <span id="stat-fake">0</span></div>
+        </div>
+    </div>
+    <div id="history-container" class="history-list">
+        <!-- History items injected via JS -->
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}

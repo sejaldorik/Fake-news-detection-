@@ -1,0 +1,15 @@
+Flask
+Flask-SQLAlchemy
+Flask-Bcrypt
+Flask-WTF
+Flask-Login
+pandas
+scikit-learn
+numpy
+lime
+newspaper3k
+lxml_html_clean
+pdfplumber
+gunicorn
+werkzeug
+bs4
